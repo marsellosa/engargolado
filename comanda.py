@@ -365,7 +365,7 @@ class Ui_Engargolado(object):
         QtCore.QMetaObject.connectSlotsByName(Engargolado)
 
         productos = ['Proteina', 'Fibra', 'Waffle', 'Colageno', 'Drive',
-                     'Rebuild', 'Aloe', 'Te', 'Batido', 'Jalea', 'Barra', 'Sopa']
+                     'Rebuild', 'Aloe', 'Te', 'Batido', 'Jalea', 'Barra', 'Sopa', 'PPP']
         top = 140
         for producto in productos:
             self.btnProductos = QtWidgets.QPushButton(self.tabEngargolado)

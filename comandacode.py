@@ -79,7 +79,8 @@ class Registro(QDialog, comanda.Ui_Engargolado):
             'Jalea':    7.5,
             'Barra':	21,
             'Colageno': 13,
-            'Sopa':     18
+            'Sopa':     18,
+            'PPP':      9.5
         }
         dic_mayoreo = {'WARA QUIROGA': 0.1}
         # factores mulplicadores
@@ -650,7 +651,7 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                             item = nombre_completo if col_index == 1 else referido[col_index]
                             self.tblReferidos.setItem(
                                 fila_index, col_index, QTableWidgetItem(item))
-##################### PESTAÑA DE COTIZADOR ############################################
+                ############### PESTAÑA DE COTIZADOR #################
                 if self.tabMain.tabText(self.tabMain.currentIndex()) == "Cotizador":
                     productos = ['Aloe', 'Te', 'Batido']
 
@@ -694,7 +695,8 @@ class Registro(QDialog, comanda.Ui_Engargolado):
             # print('rows', rows)
             if rows:
                 for row in rows:
-                    fullname = "%s %s" % (row[0], row[1])
+                    fullname = f"{row[0]} {row[1]}"
+                    # fullname = "%s %s" % (row[0], row[1])
                     dic_asistencia[str(fullname)] = row[2]
                     esClienteDe[str(fullname)] = row[3]
                     dic_referidor[str(fullname)] = row[4]
@@ -716,7 +718,7 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                     self.txtTotal.setText(str(self.sumatoria()))
 
                 except KeyError as e:
-                    print('I got a KeyError - reason "%s"' % str(e))
+                    print(f'I got a KeyError - reason "{e}"')
         else:
             self.lstExtras.clear()
             self.chkPrePago.setEnabled(False)
