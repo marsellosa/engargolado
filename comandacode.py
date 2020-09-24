@@ -28,11 +28,12 @@ class Registro(QDialog, comanda.Ui_Engargolado):
         super(Registro, self).__init__(parent)
         self.setupUi(self)
         self.valIniciales()
-        self.dibujartablas()
+        self.dibujar_componentes()
         self.connectActions()
         self.on_calFecha_changed()
 
-    def dibujartablas(self):
+    def dibujar_componentes(self):
+        # Tabla Asistencia General
         nombre_col = ['Status', 'Nombre', 'PrePago', 'Efectivo', 'Vendido',
                       'S.Rojo', 'Insumos', 'Descuento', 'Mayoreo', 'S.Verde']
         ancho = [25, 140, 25, 40, 35, 35, 35, 35, 35, 35]
@@ -46,6 +47,17 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                 col_index, QTableWidgetItem(nombre))
             self.tblAsistenciaGeneral.setColumnWidth(
                 col_index, ancho[col_index])
+        
+        # Botones de productos extras
+        productos = ['Proteina', 'Fibra', 'Colageno', 'Drive',
+                     'Rebuild', 'Aloe', 'Te', 'Batido', 'Barra', 'Sopa', 'PPP', 'Waffle', 'Jalea']
+        top = 136
+        for producto in productos:
+            self.btnProductos = QPushButton(self.tabEngargolado)
+            self.btnProductos.setGeometry(10, top, 110, 25)
+            self.btnProductos.setText(producto)
+            self.btnProductos.clicked.connect(self.on_extraButtons_clicked)
+            top += 30
 
         self.tblAsistenciaPersonal.setHorizontalHeader(
             RotatedHeaderView(self.tblAsistenciaPersonal))
@@ -311,8 +323,9 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                 # self.lstExtras.addItem(objName[3:])
                 self.lstExtras.addItem(sender)
                 self.txtTotal.setText(str(self.sumatoria()))
-        # if self.tabMain.tabText(self.tabMain.currentIndex()) == "Cotizador":
-        #     self.lstProductos.addItem(objName[3:])
+        if self.tabMain.tabText(self.tabMain.currentIndex()) == "Cotizador":
+            self.lstProductos.addItem(sender)
+            # self.lstProductos.addItem(objName[3:])
             # self.btnBatido.setText()
             # print "%s: %s" % (sender, self.cotizador(sender))
             # print "sender: %s" %
@@ -799,8 +812,7 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                     item += 1
 
     def fillstatics(self, operador):
-        condicion = "" if operador == "CLUB" else " AND id_operador=%s" % esOperador[
-            operador]
+        condicion = "" if operador == "CLUB" else " AND id_operador={}".format(esOperador[operador])
         query = f"""
                 SELECT
                     ifnull(sum(consumos_totales),0) as consumos_totales,
@@ -816,7 +828,7 @@ class Registro(QDialog, comanda.Ui_Engargolado):
                 WHERE
                     fecha_calendario='{fecha_calendario}'{condicion};"""  # % (fecha_calendario, condicion)
         # print query
-        self.lblNomSem.setText(nombreDia)
+        self.lblNomSem.setText(nombreDia.capitalize())
         for item in BD.interAct(query):
             self.lblConsumos.setText(str(item[0]))
             self.lblVendido.setText(str("%.1f" % item[1]))

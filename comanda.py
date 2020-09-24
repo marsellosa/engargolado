@@ -219,7 +219,7 @@ class Ui_Engargolado(object):
         self.cboPrePago.setObjectName("cboPrePago")
         self.horizontalLayout.addWidget(self.cboPrePago)
         self.layoutWidget10 = QtWidgets.QWidget(self.tabEngargolado)
-        self.layoutWidget10.setGeometry(QtCore.QRect(510, 520, 161, 27))
+        self.layoutWidget10.setGeometry(QtCore.QRect(480, 520, 200, 27))
         self.layoutWidget10.setObjectName("layoutWidget10")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget10)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -363,16 +363,6 @@ class Ui_Engargolado(object):
         self.retranslateUi(Engargolado)
         self.tabMain.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Engargolado)
-
-        productos = ['Proteina', 'Fibra', 'Waffle', 'Colageno', 'Drive',
-                     'Rebuild', 'Aloe', 'Te', 'Batido', 'Jalea', 'Barra', 'Sopa', 'PPP']
-        top = 140
-        for producto in productos:
-            self.btnProductos = QtWidgets.QPushButton(self.tabEngargolado)
-            self.btnProductos.setGeometry(10, top, 109, 25)
-            self.btnProductos.setText(producto)
-            self.btnProductos.clicked.connect(self.on_extraButtons_clicked)
-            top += 30
 
     def retranslateUi(self, Engargolado):
         _translate = QtCore.QCoreApplication.translate

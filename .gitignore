@@ -25,6 +25,7 @@ Pipfile
 Pipfile.lock
 comanda
 registro
+registro *
 comanda_2019dic5.py
 DATABASE_URL
 LICENSE
